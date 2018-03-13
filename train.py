@@ -23,8 +23,10 @@ parser.add_argument('--lr', '--learning-rate', default=3e-5, type=float, help='i
 parser.add_argument('--momentum', default=0.9, type=float, help='momentum')
 parser.add_argument('--weight_decay', default=5e-4, type=float, help='Weight decay for SGD')
 parser.add_argument('--gamma', default=0.9, type=float, help='Gamma update for SGD')
-parser.add_argument('--basepath',type=str)
-parser.add_argument('--resume',type=str)
+parser.add_argument('--basepath_d',type=str,help='The basepath of KittiTracking')
+parser.add_argument('--basepath_s',type=str,help='The basepath of Kitti Raw Data')
+parser.add_argument('--gt_path_s',type=str,help='The path of Stixel Ground Trurh')
+parser.add_argument('--resume',type=str,help='The path of checkpoint')
 
 args = parser.parse_args()
 
@@ -121,7 +123,7 @@ def stixel_train():
     net.train()
     printfrq=10
     step=0
-    dataset = StixelKitti('/data/Stixel','/data/Stixel/StixelsGroundTruth.txt',StixelAugmentation(size=ssd_dim, mean=means))
+    dataset = StixelKitti(args.basepath_s,args.gt_path_s,StixelAugmentation(size=ssd_dim, mean=means))
     data_loader=data.DataLoader(dataset, batch_size, num_workers=args.num_workers,
                                   shuffle=False, pin_memory=True)
     lossfunction=StixelLoss()

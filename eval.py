@@ -13,10 +13,10 @@ import numpy as np
 import cv2
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--basepath',type=str)
-parser.add_argument('--outpath',default='./eval/',type=str)
-parser.add_argument('--model',type=str)
-parser.add_argument('--index',type=int,default=1) #the index of KittiTracking video
+parser.add_argument('--basepath',type=str,help='The basepath of KittiTracking')
+parser.add_argument('--outpath',default='./eval/',type=str,help='The path of output demo')
+parser.add_argument('--model',type=str,help='The path of model to evaluate')
+parser.add_argument('--index',type=int,default=1,help='the index of KittiTracking video')
 
 args = parser.parse_args()
 
